@@ -53,8 +53,27 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
             res.type("application/json")
             val jsonAdapter = this.moshi.adapter<Map<String, Customer?>>(Map::class.java)
             val id = req.params(":id").toInt()
-            val cust = customers.find { it.id == id }
+            val cust: Customer? = customers.find { it.id == id }
+            if (cust == null)
+                res.status(404)
             jsonAdapter.toJson(mapOf("customer" to cust))
+        }
+
+        this.http.get("/customer_query") { req, res ->
+            res.type("application/json")
+            val name: String? = req.queryParams("name")
+            if (name == null) {
+                res.status(400)
+                "{}"
+            }
+            else {
+                val matches: List<Customer>? = customers.filter { it.name.contains(name) }
+                if (matches == null)
+                    res.status(404)
+
+                val jsonAdapter = this.moshi.adapter<Map<String, List<Customer>?>>(Map::class.java)
+                jsonAdapter.toJson(mapOf("customers" to matches))
+            }
         }
 
     }
