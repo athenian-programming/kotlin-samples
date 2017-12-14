@@ -7,12 +7,31 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
 
     private val http = Service.ignite()
 
-    init {
-        this.http.port(this.port)
-    }
-
     override fun startUp() {
-        this.http.get("/hello") { req, res -> "Hello World" }
+        this.http.port(this.port)
+
+        this.http.get("/") { req, res ->
+            res.type("text/plain")
+            "This is the root"
+        }
+
+        this.http.get("/plain-hello") { req, res ->
+            res.type("text/plain")
+            "Hello World!"
+        }
+
+        this.http.get("/html-hello") { req, res ->
+            res.type("text/html")
+            """
+            <html>
+                <head>
+                </head>
+                <body>
+                    <h1>Hello World!</h1>
+                </body>
+            </html>
+            """
+        }
     }
 
     override fun shutDown() {

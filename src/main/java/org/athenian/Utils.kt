@@ -5,7 +5,7 @@ import com.beust.jcommander.JCommander
 import java.lang.String.format
 
 fun getVersionDesc(asJson: Boolean): String {
-    val annotation = VersionAnnotation::class.java.getPackage().getAnnotation(VersionAnnotation::class.java)
+    val annotation = CustomerServer::class.java.getPackage().getAnnotation(VersionAnnotation::class.java)
     return if (asJson)
         format("{\"Version\": \"%s\", \"Release Date\": \"%s\"}", annotation.version, annotation.date)
     else
