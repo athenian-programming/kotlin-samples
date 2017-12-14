@@ -33,6 +33,7 @@
 
         <guava.version>19.0</guava.version>
         <okhttp.version>3.9.1</okhttp.version>
+        <moshi.version>1.5.0</moshi.version>
 
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.13</slf4j.version>
@@ -95,6 +96,12 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>${okhttp.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.moshi</groupId>
+            <artifactId>moshi-kotlin</artifactId>
+            <version>${moshi.version}</version>
         </dependency>
 
         <dependency>
