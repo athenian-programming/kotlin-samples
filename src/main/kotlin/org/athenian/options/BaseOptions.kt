@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 import java.lang.String.format
 import java.util.*
 
-abstract class BaseOptions protected constructor(private val programName: String, private val argv: Array<String>) {
+abstract class BaseOptions protected constructor(private val progName: String, private val argv: Array<String>) {
 
     @Parameter(names = arrayOf("-r", "--admin"), description = "Admin servlets enabled")
     private var adminEnabled: Boolean? = null
@@ -42,22 +42,23 @@ abstract class BaseOptions protected constructor(private val programName: String
     }
 
     private fun parseArgs(argv: Array<String>?) {
-        try {
-            val jcom = JCommander(this)
-            jcom.programName = this.programName
-            jcom.setCaseSensitiveOptions(false)
-            jcom.parse(*argv ?: arrayOf<String>())
+        with(JCommander(this)) {
+            try {
+                programName = progName
+                setCaseSensitiveOptions(false)
+                parse(*argv ?: arrayOf<String>())
 
-            if (this.usage) {
-                jcom.usage()
-                System.exit(0)
+                if (usage) {
+                    usage()
+                    System.exit(0)
+                }
+            } catch (e: ParameterException) {
+                logger.error(e.message)
+                usage()
+                System.exit(1)
             }
-        } catch (e: ParameterException) {
-            logger.error(e.message, e)
-            System.exit(1)
         }
     }
-
 
     companion object {
         private val logger = LoggerFactory.getLogger(BaseOptions::class.java)

@@ -6,9 +6,9 @@ import com.beust.jcommander.JCommander
 fun getVersionDesc(asJson: Boolean): String {
     val annotation = CustomerServer::class.java.getPackage().getAnnotation(VersionAnnotation::class.java)
     return if (asJson)
-        "{\"Version\": \"$annotation.version\", \"Release Date\": \"$annotation.date\"}"
+        "{\"Version\": \"${annotation.version}\", \"Release Date\": \"${annotation.date}\"}"
     else
-        "Version: $annotation.version Release Date: $annotation.date"
+        "Version: ${annotation.version} Release Date: ${annotation.date}"
 }
 
 class VersionValidator : IParameterValidator {
