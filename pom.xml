@@ -26,8 +26,8 @@
 
 
     <properties>
-        <kotlin.version>1.1.51</kotlin.version>
-        <stdlib.version>1.2.0</stdlib.version>
+        <kotlin.version>1.2.10</kotlin.version>
+        <stdlib.version>1.2.10</stdlib.version>
         <spark.version>1.0.0-alpha</spark.version>
 
         <jcommander.version>1.72</jcommander.version>
@@ -153,7 +153,7 @@
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jre7</artifactId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
 
@@ -259,7 +259,6 @@
                         </manifest>
                     </archive>
                 </configuration>
-                <!-- This includes sources in jar
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -268,7 +267,6 @@
                         </goals>
                     </execution>
                 </executions>
-                -->
             </plugin>
 
             <plugin>
@@ -327,14 +325,12 @@
 
                 <executions>
                     <execution>
-
                         <phase>package</phase>
                         <goals>
                             <goal>assemble</goal>
                         </goals>
 
                         <configuration>
-
                             <assembleDirectory>target</assembleDirectory>
                             <generateRepository>true</generateRepository>
                             <repositoryLayout>flat</repositoryLayout>
@@ -377,9 +373,8 @@
                         </configuration>
                     </execution>
 
-                    <!-- Create prometheus-agent jsw scripts -->
+                    <!-- Create jsw scripts -->
                     <execution>
-
                         <id>generate-agent-jsw-scripts</id>
                         <phase>package</phase>
                         <goals>
@@ -455,27 +450,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/grpc/*.class</exclude>
-                        <exclude>**/ConfigVals*.class</exclude>
-                        <exclude>**/ZipkinReporter*.class</exclude>
-                        <exclude>**/AutoValue_*.class</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
@@ -505,29 +479,5 @@
 
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/grpc/**</exclude>
-                        <exclude>**/ConfigVals*.class</exclude>
-                        <exclude>**/ZipkinReporter*.class</exclude>
-                    </excludes>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <!-- select non-aggregate reports -->
-                            <report>report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
 
 </project>

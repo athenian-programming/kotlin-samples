@@ -11,7 +11,6 @@ class ServerOptions(argv: Array<String>) : BaseOptions(CustomerServer::class.jav
     val port: Int
         get() = this.portVal ?: 8080
 
-    constructor(args: List<String>) : this(Iterables.toArray<String>(args ?: emptyList<String>(),
-                                                                     String::class.java)) {
+    constructor(args: List<String>) : this(Iterables.toArray<String>(args, String::class.java)) {
     }
 }
