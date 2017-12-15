@@ -19,17 +19,9 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.netty.NettyApplicationEngine
 import io.ktor.util.ValuesMap
+import org.athenian.options.ServerOptions
 import java.util.concurrent.TimeUnit
-import java.util.concurrent.atomic.AtomicInteger
 
-
-data class Customer(val name: String, val address: String, val paid: Boolean) {
-    val id = idCounter.getAndIncrement()
-
-    companion object {
-        private val idCounter: AtomicInteger = AtomicInteger(1)
-    }
-}
 
 class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
 
@@ -65,18 +57,19 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
             }
 
             get("/customers") {
-                val jsonAdapter = moshi.adapter<Map<String, List<Customer>>>(Map::class.java)
-                call.respondText(jsonAdapter.toJson(mapOf("customers" to customers)), ContentType.Application.Json)
+                val jsonAdapter = moshi.adapter<List<Customer>>(List::class.java)
+                call.respondText(jsonAdapter.toJson(customers), ContentType.Application.Json)
             }
 
             get("/customers/{id}") {
-                val jsonAdapter = moshi.adapter<Map<String, Customer?>>(Map::class.java)
                 val id = call.parameters["id"]?.toInt() ?: -1
                 val cust: Customer? = customers.find { it.id == id }
                 if (cust == null)
                     call.respond(HttpStatusCode.NotFound, "Customer not found")
-                else
-                    call.respondText(jsonAdapter.toJson(mapOf("customer" to cust)), ContentType.Application.Json)
+                else {
+                    val jsonAdapter = moshi.adapter<Customer?>(List::class.java)
+                    call.respondText(jsonAdapter.toJson(cust), ContentType.Application.Json)
+                }
             }
 
             get("/customer_query") {
@@ -89,8 +82,8 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
                     if (matches == null)
                         call.respond(HttpStatusCode.NotFound, "Customer not found")
                     else {
-                        val jsonAdapter = moshi.adapter<Map<String, List<Customer>?>>(Map::class.java)
-                        call.respondText(jsonAdapter.toJson(mapOf("customers" to matches)), ContentType.Application.Json)
+                        val jsonAdapter = moshi.adapter<List<Customer>?>(List::class.java)
+                        call.respondText(jsonAdapter.toJson(matches), ContentType.Application.Json)
                     }
                 }
             }
@@ -107,8 +100,8 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
                 else {
                     val cust = Customer(name, address, paid)
                     customers.add(cust)
-                    val jsonAdapter = moshi.adapter<Map<String, Customer>>(Map::class.java)
-                    call.respondText(jsonAdapter.toJson(mapOf("customer" to cust)), ContentType.Application.Json)
+                    val jsonAdapter = moshi.adapter<Customer>(Customer::class.java)
+                    call.respondText(jsonAdapter.toJson(cust), ContentType.Application.Json)
                 }
             }
         }

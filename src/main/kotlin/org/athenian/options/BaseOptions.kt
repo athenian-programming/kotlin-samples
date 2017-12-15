@@ -1,9 +1,10 @@
-package org.athenian
+package org.athenian.options
 
 import com.beust.jcommander.DynamicParameter
 import com.beust.jcommander.JCommander
 import com.beust.jcommander.Parameter
 import com.beust.jcommander.ParameterException
+import org.athenian.VersionValidator
 import org.slf4j.LoggerFactory
 import java.lang.String.format
 import java.util.*

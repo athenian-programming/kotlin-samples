@@ -1,7 +1,8 @@
-package org.athenian
+package org.athenian.options
 
 import com.beust.jcommander.Parameter
 import com.google.common.collect.Iterables
+import org.athenian.CustomerServer
 
 class ServerOptions(argv: Array<String>) : BaseOptions(CustomerServer::class.java.getSimpleName(), argv) {
 

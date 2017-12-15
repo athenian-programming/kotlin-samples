@@ -29,7 +29,7 @@
         <kotlin.version>1.2.10</kotlin.version>
         <stdlib.version>1.2.10</stdlib.version>
         <spark.version>1.0.0-alpha</spark.version>
-
+        <retrofit.version>2.3.0</retrofit.version>
         <jcommander.version>1.72</jcommander.version>
 
         <guava.version>19.0</guava.version>
@@ -85,13 +85,6 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -110,9 +103,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>${okhttp.version}</version>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-moshi</artifactId>
+            <version>${retrofit.version}</version>
         </dependency>
 
         <dependency>
