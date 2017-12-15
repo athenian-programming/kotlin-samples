@@ -248,35 +248,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <version>${protobuf.plugin.version}</version>
-                <configuration>
-                    <pluginArtifact>
-                        io.grpc:protoc-gen-grpc-java:${grpc.plugin.version}:exe:${os.detected.classifier}
-                    </pluginArtifact>
-                    <pluginId>grpc-java</pluginId>
-                    <protocArtifact>
-                        com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
-                    </protocArtifact>
-                    <outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
-                    <!-- Make sure this is disabled as otherwise build mysteriously fails -->
-                    <clearOutputDirectory>false</clearOutputDirectory>
-                    <!-- Uncomment this to use the local protoc instead of the one downloaded from the repo
-                    <protocExecutable>/usr/local/bin/protoc</protocExecutable>
-                    -->
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>compile-custom</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>${assembly.version}</version>
                 <executions>

@@ -76,6 +76,17 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
             }
         }
 
+        this.http.post("/customers") { req, res ->
+            val name: String? = req.queryParams("name")
+            val r = req.raw()
+            val body = req.body()
+            res.type("application/json")
+            val jsonAdapter = this.moshi.adapter<Map<String, List<Customer>>>(Map::class.java)
+            jsonAdapter.toJson(mapOf("customers" to customers))
+        }
+
+
+
     }
 
     override fun shutDown() {
