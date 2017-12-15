@@ -11,14 +11,6 @@ import java.util.*
 
 abstract class BaseOptions protected constructor(private val progName: String, private val argv: Array<String>) {
 
-    @Parameter(names = arrayOf("-r", "--admin"), description = "Admin servlets enabled")
-    private var adminEnabled: Boolean? = null
-    @Parameter(names = arrayOf("-i", "--admin_port"), description = "Admin servlets port")
-    private var adminPort: Int? = null
-    @Parameter(names = arrayOf("-e", "--metrics"), description = "Metrics enabled")
-    private var metricsEnabled: Boolean? = null
-    @Parameter(names = arrayOf("-m", "--metrics_port"), description = "Metrics listen port")
-    private var metricsPort: Int? = null
     @Parameter(names = arrayOf("-v", "--version"), description = "Print version info and exit", validateWith = arrayOf(VersionValidator::class))
     private var version = false
     @Parameter(names = arrayOf("-u", "--usage"), help = true)

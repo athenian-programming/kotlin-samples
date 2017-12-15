@@ -20,6 +20,7 @@ import io.ktor.server.netty.Netty
 import io.ktor.server.netty.NettyApplicationEngine
 import io.ktor.util.ValuesMap
 import org.athenian.options.ServerOptions
+import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit
 
 
@@ -67,7 +68,7 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
                 if (cust == null)
                     call.respond(HttpStatusCode.NotFound, "Customer not found")
                 else {
-                    val jsonAdapter = moshi.adapter<Customer?>(List::class.java)
+                    val jsonAdapter = moshi.adapter<Customer?>(Customer::class.java)
                     call.respondText(jsonAdapter.toJson(cust), ContentType.Application.Json)
                 }
             }
@@ -108,17 +109,22 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
     }
 
     override fun startUp() {
+        logger.info("Starting server listening on port $port")
         this.server.start(wait = false)
     }
 
     override fun shutDown() {
         this.server.stop(1, 5, TimeUnit.SECONDS)
     }
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(CustomerServer::class.java)
+    }
+
 }
 
 fun main(args: Array<String>) {
     val options = ServerOptions(args)
-
     val server = CustomerServer(port = options.port)
     server.startAsync();
 }

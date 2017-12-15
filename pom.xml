@@ -27,8 +27,9 @@
 
     <properties>
         <kotlin.version>1.2.10</kotlin.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+
         <stdlib.version>1.2.10</stdlib.version>
-        <spark.version>1.0.0-alpha</spark.version>
         <retrofit.version>2.3.0</retrofit.version>
         <jcommander.version>1.72</jcommander.version>
 
@@ -38,7 +39,7 @@
         <ktor.version>0.9.1-alpha-8</ktor.version>
 
         <logback.version>1.2.3</logback.version>
-        <slf4j.version>1.7.13</slf4j.version>
+        <slf4j.version>1.8.0-beta0</slf4j.version>
 
         <junit.version>4.12</junit.version>
         <assertj.version>3.8.0</assertj.version>
@@ -265,12 +266,11 @@
                 <version>${assembly.version}</version>
                 <executions>
                     <execution>
-                        <id>proxy</id>
+                        <id>server</id>
                         <goals>
                             <goal>attached</goal>
                         </goals>
                         <phase>package</phase>
-
                         <configuration>
                             <finalName>customer-server</finalName>
                             <descriptorRefs>
@@ -279,7 +279,6 @@
                             <archive>
                                 <manifest>
                                     <mainClass>org.athenian.CustomerServerKt</mainClass>
-                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                                 </manifest>
                             </archive>
                         </configuration>
