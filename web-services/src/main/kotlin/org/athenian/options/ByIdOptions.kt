@@ -4,7 +4,7 @@ import com.beust.jcommander.Parameter
 
 class ByIdOptions(argv: Array<String>) : BaseOptions("CustomerById", argv) {
 
-    @Parameter(names = arrayOf("-i", "--id"), description = "Customer Id", required = true)
+    @Parameter(names = arrayOf("-i", "--id"), description = "Customer id", required = true)
     private var idVal: Int? = null
 
     val id: Int

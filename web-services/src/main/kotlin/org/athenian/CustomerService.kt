@@ -16,6 +16,6 @@ interface CustomerService {
 
     @FormUrlEncoded
     @POST("customers")
-    fun updateUser(@Field("name") name: String, @Field("address") address: String, @Field("paid") paid: Boolean): Call<Customer>
+    fun createCustomer(@Field("name") name: String, @Field("address") address: String, @Field("paid") paid: Boolean): Call<Customer>
 }
 

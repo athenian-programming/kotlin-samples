@@ -106,7 +106,7 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
                 val map = call.receive<ValuesMap>()
                 val name = map["name"]
                 val address = map["address"] ?: ""
-                val paid = map["address"]?.toBoolean() ?: false
+                val paid = map["paid"]?.toBoolean() ?: false
 
                 if (name == null) {
                     call.respond(HttpStatusCode.BadRequest, "Missing name")

@@ -1,5 +1,7 @@
 # Kotlin Web Services 
 
+This module uses [Ktor](http://ktor.io) and [Retrofit](http://square.github.io/retrofit/).
+
 ## Usage
 
 Start the server with:
@@ -44,23 +46,23 @@ $ http :8080/customers
 
 Query all customers with:
 ```bash
-$ java -jar web-services/target/all-customers-jar-with-dependencies.jar
+$ java -jar target/all-customers-jar-with-dependencies.jar
 ```
 
 Query customers by id with:
 ```bash
-$ java -jar web-services/target/by-id-jar-with-dependencies.jar -i 1
-$ java -jar web-services/target/by-id-jar-with-dependencies.jar -i 2
-$ java -jar web-services/target/by-id-jar-with-dependencies.jar -i 3
+$ java -jar target/by-id-jar-with-dependencies.jar -i 1
+$ java -jar target/by-id-jar-with-dependencies.jar -i 2
+$ java -jar target/by-id-jar-with-dependencies.jar -i 3
 ```
 
 Query customers by name with:
 ```bash
-$ java -jar web-services/target/by-name-jar-with-dependencies.jar -n Bill
+$ java -jar target/by-name-jar-with-dependencies.jar -n Bill
 ```
 
 Create a new customer with:
 ```bash
-$ java -jar web-services/target/create-customer-jar-with-dependencies.jar -n "Mike Bryant" -a "1831 Dupont St"
+$ java -jar target/create-customer-jar-with-dependencies.jar -n "Mike Bryant" -a "1831 Dupont St"
 ```
 
