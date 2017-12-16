@@ -1,9 +1,8 @@
 package org.athenian
 
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
+
 
 interface CustomerService {
     @GET("customers")
@@ -14,4 +13,9 @@ interface CustomerService {
 
     @GET("customer_query")
     fun customerByName(@Query("name") name: String): Call<List<Customer>>
+
+    @FormUrlEncoded
+    @POST("customers")
+    fun updateUser(@Field("name") name: String, @Field("address") address: String, @Field("paid") paid: Boolean): Call<Customer>
 }
+
