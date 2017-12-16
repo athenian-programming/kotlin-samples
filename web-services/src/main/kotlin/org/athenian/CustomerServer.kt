@@ -133,12 +133,11 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
     companion object {
         private val logger = LoggerFactory.getLogger(CustomerServer::class.java)
     }
-
 }
 
 fun main(args: Array<String>) {
     val options = ServerOptions(args)
-    val server = CustomerServer(port = options.port)
+    val server = CustomerServer(options.port)
     server.startAsync();
 }
 

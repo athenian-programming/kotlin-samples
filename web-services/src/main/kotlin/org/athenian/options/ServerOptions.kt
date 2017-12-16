@@ -5,9 +5,10 @@ import org.athenian.CustomerServer
 
 class ServerOptions(argv: Array<String>) : BaseOptions(CustomerServer::class.java.getSimpleName(), argv) {
 
-    @Parameter(names = arrayOf("-p", "--server_port"), description = "Listen port for server")
-    private var portVal: Int? = null
+    @Parameter(names = arrayOf("-p", "--server_port"), description = "Serve listen port")
+    var port: Int = 8090
 
-    val port: Int
-        get() = this.portVal ?: 8080
+    init {
+        this.parseArgs()
+    }
 }
