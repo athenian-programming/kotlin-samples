@@ -8,7 +8,7 @@ class CreateOptions(argv: Array<String>) : BaseOptions("CreateCustomer", argv) {
     var name: String = ""
 
     @Parameter(names = arrayOf("-a", "--address"), description = "Customer address")
-    var addressVal: String = ""
+    var address: String = ""
 
     @Parameter(names = arrayOf("-p", "--paid"), description = "Customer paid")
     var paid: Boolean = false
