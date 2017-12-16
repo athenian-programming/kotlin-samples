@@ -13,8 +13,6 @@ fun main(args: Array<String>) {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
     val service = retrofit.create(CustomerService::class.java)
-    val call = service.customerById(options.id)
-    val resp = call.execute()
-    val cust = resp.body()
+    val cust = service.customerById(options.id).execute().body()
     println(cust)
 }

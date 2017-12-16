@@ -1,22 +1,38 @@
 package org.athenian.options
 
-import com.beust.jcommander.DynamicParameter
-import com.beust.jcommander.JCommander
-import com.beust.jcommander.Parameter
-import com.beust.jcommander.ParameterException
-import org.athenian.VersionValidator
+import com.beust.jcommander.*
+import org.athenian.CustomerServer
+import org.athenian.VersionAnnotation
 import org.slf4j.LoggerFactory
 import java.lang.String.format
-import java.util.*
+
+
+class VersionValidator : IParameterValidator {
+    fun getVersionDesc(asJson: Boolean): String {
+        val annotation = CustomerServer::class.java.getPackage().getAnnotation(VersionAnnotation::class.java)
+        return if (asJson)
+            """{"Version": "${annotation.version}", "Release Date": "${annotation.date}"}"""
+        else
+            "Version: ${annotation.version} Release Date: ${annotation.date}"
+    }
+
+    override fun validate(name: String, value: String) {
+        val console = JCommander.getConsole()
+        console.println(getVersionDesc(false))
+        System.exit(0)
+    }
+}
 
 abstract class BaseOptions protected constructor(private val progName: String, private val argv: Array<String>) {
 
-    @Parameter(names = arrayOf("-v", "--version"), description = "Print version info and exit", validateWith = arrayOf(VersionValidator::class))
+    @Parameter(names = arrayOf("-v", "--version"),
+               description = "Print version info and exit",
+               validateWith = arrayOf(VersionValidator::class))
     private var version = false
     @Parameter(names = arrayOf("-u", "--usage"), help = true)
     private var usage: Boolean = false
     @DynamicParameter(names = arrayOf("-D"), description = "Dynamic property assignment")
-    private var dynamicParams: Map<String, String> = HashMap()
+    private var dynamicParams: Map<String, String> = mutableMapOf()
 
     init {
         this.parseArgs(argv)

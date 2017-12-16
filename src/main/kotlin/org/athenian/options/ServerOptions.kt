@@ -1,7 +1,6 @@
 package org.athenian.options
 
 import com.beust.jcommander.Parameter
-import com.google.common.collect.Iterables
 import org.athenian.CustomerServer
 
 class ServerOptions(argv: Array<String>) : BaseOptions(CustomerServer::class.java.getSimpleName(), argv) {
@@ -11,7 +10,4 @@ class ServerOptions(argv: Array<String>) : BaseOptions(CustomerServer::class.jav
 
     val port: Int
         get() = this.portVal ?: 8080
-
-    constructor(args: List<String>) : this(Iterables.toArray<String>(args, String::class.java)) {
-    }
 }
