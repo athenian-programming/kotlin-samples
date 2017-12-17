@@ -20,6 +20,7 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.netty.NettyApplicationEngine
 import io.ktor.util.ValuesMap
+import org.athenian.common.GenericServiceListener
 import org.athenian.options.ServerOptions
 import org.slf4j.LoggerFactory
 import java.util.concurrent.TimeUnit

@@ -1,8 +1,6 @@
-package org.athenian.options
+package org.athenian.common
 
 import com.beust.jcommander.*
-import org.athenian.CustomerServer
-import org.athenian.VersionAnnotation
 import org.slf4j.LoggerFactory
 import java.lang.String.format
 
@@ -50,7 +48,7 @@ abstract class BaseOptions protected constructor(private val progName: String, p
 
     private class VersionValidator : IParameterValidator {
         private fun getVersionDesc(asJson: Boolean): String {
-            val annotation = CustomerServer::class.java.getPackage().getAnnotation(VersionAnnotation::class.java)
+            val annotation = BaseOptions::class.java.getPackage().getAnnotation(VersionAnnotation::class.java)
             return if (asJson)
                 """{"Version": "${annotation.version}", "Release Date": "${annotation.date}"}"""
             else

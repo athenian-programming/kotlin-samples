@@ -20,27 +20,37 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.athenian</groupId>
     <artifactId>kotlin-samples</artifactId>
+    <groupId>org.athenian</groupId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
+        <module>common</module>
         <module>web-services</module>
         <module>jdbi</module>
+        <module>grpc</module>
     </modules>
 
     <properties>
+        <project.version>1.0.0-SNAPSHOT</project.version>
+
         <kotlin.version>1.2.10</kotlin.version>
+        <stdlib.version>1.2.10</stdlib.version>
         <kotlin.compiler.incremental>false</kotlin.compiler.incremental>
 
-        <stdlib.version>1.2.10</stdlib.version>
-        <retrofit.version>2.3.0</retrofit.version>
         <jcommander.version>1.72</jcommander.version>
         <jdbi.version>3.0.0-beta2</jdbi.version>
         <guava.version>19.0</guava.version>
+
         <moshi.version>1.5.0</moshi.version>
         <ktor.version>0.9.1-alpha-8</ktor.version>
+        <retrofit.version>2.3.0</retrofit.version>
+
+        <grpc.version>1.8.0</grpc.version>
+        <grpc.plugin.version>1.8.0</grpc.plugin.version>
+        <protobuf.version>3.4.0</protobuf.version>
+        <protobuf.plugin.version>0.5.0</protobuf.plugin.version>
 
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.8.0-beta0</slf4j.version>
@@ -164,6 +174,9 @@
     </pluginRepositories>
 
     <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+
         <defaultGoal>package</defaultGoal>
 
         <extensions>

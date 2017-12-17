@@ -1,6 +1,7 @@
 package org.athenian.options
 
 import com.beust.jcommander.Parameter
+import org.athenian.common.BaseOptions
 
 class CreateOptions(argv: Array<String>) : BaseOptions("CreateCustomer", argv) {
 
