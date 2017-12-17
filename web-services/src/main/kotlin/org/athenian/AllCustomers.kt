@@ -12,6 +12,5 @@ fun main(args: Array<String>) {
             .build()
     val service = retrofit.create(CustomerService::class.java)
     val custs = service.allCustomers().execute().body() ?: listOf()
-    for (cust in custs)
-        println(cust)
+    custs.forEach(::println)
 }

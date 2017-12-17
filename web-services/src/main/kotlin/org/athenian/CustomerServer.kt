@@ -1,6 +1,7 @@
 package org.athenian
 
 import com.google.common.util.concurrent.AbstractIdleService
+import com.google.common.util.concurrent.MoreExecutors
 import com.squareup.moshi.Moshi
 import io.ktor.application.call
 import io.ktor.application.install
@@ -119,6 +120,10 @@ class CustomerServer(val port: Int = 8080) : AbstractIdleService() {
                 }
             }
         }
+    }
+
+    init {
+        this.addListener(GenericServiceListener(this), MoreExecutors.directExecutor())
     }
 
     override fun startUp() {
